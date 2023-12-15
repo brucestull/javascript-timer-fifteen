@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     let time;
     let intervalId;
-    const initialTime = 15 * 60; // 15 minutes
+    const initialTime = 15 * 60 * 10; // 15 minutes in tenths of seconds
     const timerDisplay = document.getElementById('timer-display');
     const startButton = document.getElementById('start-button');
     const pauseButton = document.getElementById('pause-button');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     startButton.addEventListener('click', function() {
         clearInterval(intervalId);
-        intervalId = setInterval(updateTimer, 1000);
+        intervalId = setInterval(updateTimer, 100); // Update every tenth of a second
     });
 
     pauseButton.addEventListener('click', function() {
@@ -24,10 +24,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     function updateTimer() {
-        let minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        timerDisplay.textContent = `${minutes}:${seconds}`;
+        let minutes = Math.floor(time / 600); // Convert to minutes
+        let seconds = Math.floor((time % 600) / 10); // Convert remaining time to seconds
+        let tenths = time % 10; // Get tenths of a second
+        seconds = seconds < 10 ? '0' + seconds : seconds; // Format seconds
+        timerDisplay.textContent = `${minutes}:${seconds}.${tenths}`;
         time--;
 
         if (time < 0) {
@@ -38,6 +39,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function resetTimer() {
         time = initialTime;
-        timerDisplay.textContent = '15:00';
+        timerDisplay.textContent = '15:00.0';
     }
 });
