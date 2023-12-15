@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let tenths = time % 10; // Get tenths of a second
         seconds = seconds < 10 ? '0' + seconds : seconds; // Format seconds
         timerDisplay.textContent = `${minutes}:${seconds}.${tenths}`;
-        time--;
+        time--; // Decrement time by one tenth of a second
 
         if (time < 0) {
             clearInterval(intervalId);
