@@ -2,54 +2,15 @@
 <html>
 <head>
     <title>Timer App</title>
-    <style>
-        #timer-display {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            margin-right: 5px;
-            padding: 5px 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="site.css">
 </head>
 <body>
     <h1>15 Minute Timer</h1>
     <div id="timer-display">15:00</div>
     <button id="start-button">Start Teh Timer</button>
     <button id="pause-button">Paws Teh Timer</button>
+    <button id="reset-button">Reset Timer</button>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            let time = 15 * 60;
-            let intervalId;
-            const timerDisplay = document.getElementById('timer-display');
-            const startButton = document.getElementById('start-button');
-            const pauseButton = document.getElementById('pause-button');
-
-            startButton.addEventListener('click', function() {
-                clearInterval(intervalId);
-                intervalId = setInterval(updateTimer, 1000);
-            });
-
-            pauseButton.addEventListener('click', function() {
-                clearInterval(intervalId);
-            });
-
-            function updateTimer() {
-                let minutes = Math.floor(time / 60);
-                let seconds = time % 60;
-                seconds = seconds < 10 ? '0' + seconds : seconds;
-                timerDisplay.textContent = `${minutes}:${seconds}`;
-                time--;
-
-                if (time < 0) {
-                    clearInterval(intervalId);
-                    timerDisplay.textContent = "Time's up!";
-                }
-            }
-        });
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
